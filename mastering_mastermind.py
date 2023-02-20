@@ -1,109 +1,123 @@
 import random
 import itertools
+from Mastermind_feedback import feedback
+'''mastermind game'''
 
-'''
-To do:
+#list of colors for game
+colors = ['a', 'b', 'c', 'd', 'e', 'f']
 
-- kleur gokken 
-- feedback geven als kleur niet in combinatie voor komt maar wel op goede plek, 
-als kleur wel voorkomt maar niet op de juiste plek, 
-als kleur niet voorkomt en ook niet op goede plek. 
-- Bot maken die ook met speler kan spelen
-- eventueel UI maken met tkinter (optioneel) als er tijd voor is
-'''
-
-#list of colors
-colors = ['r', 'y', 'b', 'g', 'p', 'c', 'o', 'v']
-
-#holds the answer of the color combination
-answer = []
+#gives length for color combination
 length = 4
 
-#alle mogelijkheden van combinaties kleuren
+max_guesses = length + len(colors)
+
+#all possible color combinations
 permutation = [code for code in itertools.product(colors, repeat=length)]
-print(permutation)
-print(len(permutation))
 
-#random kleuren combinatie genereren
-for i in range(0, length):
-    answer.append(random.choice(colors))
+def valid_guess(guess):
+    '''decide if the guess is valid
+    :return boolean
+    :param string
+    '''
 
-print('choice of colors from the list: ', colors)
-print(answer)
+    if guess == None:
+        return False
 
-#first guess from user
-guess = input('guess the color combination: ')
+    # check if guess is valid length
+    if len(guess) != length:
+        return False
 
-while answer != guess:
+    for pin in guess:
 
-    if guess == answer:
-        break
+        if pin not in colors:
+            return False
 
-    elif len(guess) != len(answer):
-        print('have u entered 4 colors?')
+    #guess is valid
+    return True
+def reduceer(possibilities, vorige_gok, fb):
+    '''
+    Bepaal de mogelijkheden die nog over zijn na de laatste gok.
+    :param array    Mogelijkheden die er nu nog zijn
+    :param tuple    Vorige gok
+    :param tuple    Feedback (zwart, wit)
+    :return:
+    '''
+    nieuwe_mogelijkheden = []
 
+    # test if the possibility is still possible
+    for code in possibilities:
+        #decide the feedback from the vorige_gok and the possibilities
+        #and compare with the past given feedback
+        if fb == feedback(vorige_gok, code):
+            # code is still possible
+            nieuwe_mogelijkheden.append(code)
+
+    # give back new possibilities
+    return nieuwe_mogelijkheden
+def guess_input():
+
+    #start with empty guess
+    guess = None
+
+    while not valid_guess(guess):
+        print(f'that is not the right color or combination, choose colors: {colors}')
+        guess_input = input('guess the color combination like: rbbg: ')
+
+        #convert guess to a tuple
+        guess = tuple(list(guess_input))
+
+    return guess
+
+def main():
+    '''
+    main game function (play the game)
+    '''
+    secret = random.choice(permutation)
+    print(len(permutation))
+    print(secret)
+
+    #print the color options and the answer as test
+    print('welcome in mastermind, your choice of colors from the list: ', colors)
+
+    guess = guess_input()
+
+    #number of guesses
+    guesses_amount = 1
+
+    #decide all possibilities
+    possibilities = permutation.copy()
+
+    while secret != guess and guesses_amount < max_guesses:
+        #inform user
+        print('color combination is not valid')
+        print(f'u have {max_guesses - guesses_amount} attempts')
+
+        #feedback
+        zwart, wit = feedback(secret, guess)
+        print(f'{zwart}, {wit}')
+
+        #gives remaining possibilities
+        possibilities = reduceer(possibilities, guess, (zwart, wit))
+        print(len(possibilities))
+
+        #let user guess again
+        guess = guess_input()
+
+        #amount of guesses wil get smaller
+        guesses_amount += 1
+
+    if secret == guess:
+        #inform user
+        print(f'u guessed the color in {guesses_amount} times, congrats!')
     else:
-        print(f'that is not the right color, u can choose from the following colors: {colors}')
+        print('game over, u have not guessed the code')
 
-    guess = input('guess the color combination: ')
+    #give user option to play the game again
+    play = input('do u want to play the game again? [yes/no]')
 
-print('u guessed the color, congrats!')
+    if play == 'yes':
+        main()
 
-
-def code_feedback(answer, gok):
-    goed, bijnagoed = 0, 0
-
-    # Kopieer de codes om te kunnen bewerken
-    gok, answer = list(gok).copy(), list(answer).copy()
-
-    # Vervang alle exacte matches door een plusje
-    for i in range(length):
-        if answer[i] == gok[i]:
-            answer[i], gok[i] = '+', '+'
-            goed += 1
-
-    # Als de kleur ergens anders in de code zit telt hij als
-    # bijna goed
-    for j in range(length):
-        if (gok[j] != '+') and (gok[j] in answer):
-            bijnagoed += 1
-
-    return (goed, bijnagoed)
-
-# Damian's versie van de feedbackfunctie
-def generate_feedback(combo, gok):
-    # Starter feedback if no letters are correct
-    feedback = [0, 0]
-    # Check every letter in the combination
-    for i in range(length):
-         # If the letter is in the right spot
-        if combo[i] == gok[i]:
-            feedback[0] += 1
-            feedback[1] -= 1
-        # If the letter is in the wrong spot
-        elif combo[i] in gok:
-            feedback[1] += 1
-    if feedback[1] < 0:
-        feedback[1] = 0
-    return feedback
-
-# Frequentiefunctie
-def freq(lijst):
-    f = {}
-
-    for element in lijst:
-        # Tel 1 op bij de huidige frequentie van het element (default 0)
-        f[element] = f.get(element, 0) + 1
-
-    return f
-
-combinaties = [x for x in itertools.product(colors, repeat=length)]
-print(len(combinaties))
-
-feedbackAAA = [code_feedback(combi, ['A', 'A', 'A']) for combi in combinaties]
-feedbackAAB = [code_feedback(combi, ['A', 'A', 'B']) for combi in combinaties]
-feedbackABC = [code_feedback(combi, ['A', 'B', 'C']) for combi in combinaties]
-
-print(freq(feedbackAAA))
-print(freq(feedbackAAB))
-print(freq(feedbackABC))
+#only runs the game if we want this specific script
+if __name__ == '__main__':
+    main()

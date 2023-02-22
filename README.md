@@ -5,9 +5,9 @@ Ook staat in deze file de bronvermelding volgens de APA richtlijnen.
 Mastermind:
 Voor dit project is het bekende spel mastermind gecodeerd in python. 
 In mastermind kan de code (de kleuren en hun combinatie) geraden worden en krijgt de 
-gebruiker feedback terug als het niet de goede kleur of positie in de combinatie bevat. 
+gebruiker (codebreaker) feedback terug van de computer (codemaker) als het niet de goede kleur of positie in de combinatie bevat. 
 Ook kan de computer de code zelf raden aan de hand van algoritmes en moet de gebruiker de 
-computer feedback geven. 
+computer feedback geven (rollen van codemaker en breaker draaien om). 
 
 
 Bronvermelding: 

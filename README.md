@@ -20,17 +20,17 @@ In de code staan allerlei functies en variabelen waarbij comments staan die duid
 Bronvermelding: 
 
 Project Mastermind,
-- Blijleven, L (2023, 15 Februari), 'StructuredProgramming2023', Github, geraadpleegd op 15.02.2023 van,
+1. Blijleven, L (2023, 15 Februari), 'StructuredProgramming2023', Github, geraadpleegd op 15.02.2023 van,
 https://github.com/LinaBlijlevenHU/StructuredProgramming2023/tree/main/Les3
 
-- Basilio.N (2023, 13 Februari), 'Mastermind (a-how-to in python)', medium.com, geraadpleegd op 14.02.2023 van, 
+2. Basilio.N (2023, 13 Februari), 'Mastermind (a-how-to in python)', medium.com, geraadpleegd op 14.02.2023 van, 
 https://bnbasilio.medium.com/mastermind-a-how-to-in-python-7b80ca9809ab 
 
-- Hogeschool Utrecht (2023, 11 Februari), 'slides_02-11.pdf', geraadpleegd op 20.02.2023 van, 
+3. Hogeschool Utrecht (2023, 11 Februari), 'slides_02-11.pdf', geraadpleegd op 20.02.2023 van, 
 https://canvas.hu.nl/courses/32466/files/3346854?wrap=1
 
-- OpenAI (Z.D.), ChatGPT, geraadpleegd op 21.02.2023 van,
+4. OpenAI (Z.D.), ChatGPT, geraadpleegd op 21.02.2023 van,
 https://openai.com/blog/chatgpt/
 
-- Kooi, B (Z.D.), 'Yet another Mastermind Strategy', Universiteit van Groningen, geraadpleegd op 16.02.2023 van, 
+5. Kooi, B (Z.D.), 'Yet another Mastermind Strategy', Universiteit van Groningen, geraadpleegd op 16.02.2023 van, 
 https://canvas.hu.nl/courses/32466/files/3346846/download?wrap=1

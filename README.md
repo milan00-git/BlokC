@@ -9,6 +9,7 @@ gebruiker (codebreaker) feedback terug van de computer (codemaker) als het niet 
 Ook kan de computer de code zelf raden aan de hand van algoritmes en moet de gebruiker de 
 computer feedback geven (rollen van codemaker en breaker draaien om). 
 
+In de code staan allerlei functies en variabelen waarbij comments staan die duidelijk aangeven wat fun functies zijn voor de game. 
 
 Bronvermelding: 
 
@@ -16,4 +17,5 @@ Project Mastermind,
 - Blijleven, L (15.02.2023), 'github.com', geraadpleegd op 15.02.2023,
 https://github.com/LinaBlijlevenHU/StructuredProgramming2023/tree/main/Les3
 
-- 
+- Basilio.N (13-02-2023), 'bnbasilio.medium.com', geraadpleegd op 14.02.2023, 
+https://bnbasilio.medium.com/mastermind-a-how-to-in-python-7b80ca9809ab 

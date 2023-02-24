@@ -11,6 +11,10 @@ gebruiker (codebreaker) feedback terug van de computer (codemaker) als het niet 
 Ook kan de computer de code zelf raden aan de hand van algoritmes en moet de gebruiker de 
 computer feedback geven (rollen van codemaker en breaker draaien om). 
 
+De gebruikte algortimes uit het bestand van de Universiteit van Groningen zijn:
+1. worst-case Strategy 
+2. Simple Strategy 
+
 In de code staan allerlei functies en variabelen waarbij comments staan die duidelijk aangeven wat fun functies zijn voor de game. 
 
 Bronvermelding: 
@@ -25,4 +29,8 @@ https://bnbasilio.medium.com/mastermind-a-how-to-in-python-7b80ca9809ab
 - Hogeschool Utrecht (2023, 11 Februari), 'slides_02-11.pdf', geraadpleegd op 20.02.2023 van, 
 https://canvas.hu.nl/courses/32466/files/3346854?wrap=1
 
-- 
+- OpenAI (Z.D.), ChatGPT, geraadpleegd op 21.02.2023 van,
+https://openai.com/blog/chatgpt/
+
+- Kooi, B (Z.D.), 'Yet another Mastermind Strategy', Universiteit van Groningen, geraadpleegd op 16.02.2023 van, 
+https://canvas.hu.nl/courses/32466/files/3346846/download?wrap=1

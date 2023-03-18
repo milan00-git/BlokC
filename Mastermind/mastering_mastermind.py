@@ -44,11 +44,10 @@ def valid_guess(guess):
 
     # guess is valid
     return True
-def reduce(combinations, previous_guess, fb):
+def reduce(combinations, previous_guess, feedback):
     '''
     reduces the combinations that are left from the last guess
 
-    fb = feedback
     :param array    remaining possibilities
     :param tuple    previous guess
     :param tuple    Feedback (black, white)
@@ -63,7 +62,7 @@ def reduce(combinations, previous_guess, fb):
         # feedback from the previous_guess and the possibilities
         # compared with the past given feedback
 
-        if fb == evaluate(previous_guess, code):
+        if feedback == evaluate(previous_guess, code):
 
             # code is still possible
             new_combinations.append(code)
@@ -143,11 +142,11 @@ def main():
         print(f'u have {max_guesses - guesses_amount} attempts')
 
         # gives feedback to user
-        zwart, wit = evaluate(guess, secret)
-        print(f'{zwart}, {wit}')
+        black, white = evaluate(guess, secret)
+        print(f'{black}, {white}')
 
         # gives remaining possibilities
-        possibilities = reduce(possibilities, guess, (zwart, wit))
+        possibilities = reduce(possibilities, guess, (black, white))
         print(f'u have {len(possibilities)} possibilities\n')
 
         # let user guess again
@@ -158,6 +157,8 @@ def main():
 
     if secret == guess:
         # inform user has won
+        black, white = evaluate(guess, secret)
+        print(f'{black}, {white}')
         print(f'u guessed the code in {guesses_amount} attemps, congrats!')
     else:
         # inform user has lost

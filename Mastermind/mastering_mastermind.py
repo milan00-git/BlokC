@@ -1,9 +1,9 @@
 '''mastermind game'''
-
+'''Gebruikte bronnen (zie README.md):
+Bron 1
+'''
 import random
 import itertools
-# from Mastermind_feedback import *
-
 
 '''global variables'''
 #list of colors for game
@@ -20,7 +20,7 @@ permutation = [code for code in itertools.product(colors, repeat=length)]
 
 def valid_guess(guess):
     '''
-    define what makes a guess valid
+    defines what makes a guess valid
 
     :return boolean
     :param string
@@ -36,9 +36,9 @@ def valid_guess(guess):
         print('code does not give back a valid length')
         return False
 
-    # for the
+    # does the guess contain colors that come that are valid with variable colors?
     for pin in guess:
-
+        # if the color is not in colors then code is invalid
         if pin not in colors:
             return False
 
@@ -53,7 +53,7 @@ def reduce(combinations, previous_guess, feedback):
     :param tuple    Feedback (black, white)
     :return:
     '''
-    # list of new
+    # list of new combinations
     new_combinations = []
 
     # test if the combination is still possible
@@ -167,7 +167,7 @@ def main():
     # give user option to play the game again
     play = input('do u want to play the game again? [yes/no]')
 
-    #calls main() function if user wants to play game again ('yes')
+    # calls main() function if user wants to play game again ('yes')
     if play == 'yes':
         main()
 

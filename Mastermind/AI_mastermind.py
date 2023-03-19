@@ -4,11 +4,6 @@
 Gebruikte bronnen (zie README.md):
 Alle bronnen uit readme
 '''
-# 1. adjust worst-case strategy to AABB
-# 2. For own heuristics use the worst, worst-case strategy
-# 3. simple and worst-case strategies don't give feedback in the form
-# (1,0) or (4,0)
-# 4. find a way to implement the algorithms in to the mastering_mastermind.py
 
 from mastering_mastermind import *
 import random
@@ -60,63 +55,28 @@ def simple_strategy(combinations):
             return combination
 
 def worst_case_strategy(combinations):
-    '''Select the combination with the worst worst-case score'''
+    """
+        Selects the combination with the worst worst-case score.
+        """
     scores = {}
     for guess in combinations:
-        # Keep track of the maximum minimum score across all feedbacks
-        max_min_score = 0
+        max_score = 0
         for feedback in evaluate(guess, secret):
-            # Calculate the minimum score for this feedback
-            min_score = len(combinations)
-            for possible_secret in combinations:
-                if evaluate(guess, possible_secret) != feedback:
-                    # Eliminate the possible secret based on the feedback
-                    combinations.remove(possible_secret)
-                min_score = min(min_score, len(combinations))
-                # Add the eliminated possible secret back to the list
-                combinations.append(possible_secret)
-            if min_score > max_min_score:
-                max_min_score = min_score
-        scores[guess] = max_min_score
-
-    # Choose the guess with the minimum maximum score
-    min_max_score = min(scores.values())
-    for guess in combinations:
-        if guess in scores and scores[guess] == min_max_score:
-            return guess
-
-def choose_strategy():
-    choose = int(input('choose a strategy from 1 to 3: \n'
-                   '1. simple strategy\n'
-                   '2. worst case strategy\n'
-                   '3. my heuristic\n'
-                   'insert answer: '))
-
-    if choose == 1:
-        strategy = simple_strategy(combinations)
-        return strategy
-
-    elif choose == 2:
-        strategy = worst_case_strategy(combinations)
-        return strategy
-
-    elif choose == 3:
-        strategy = my_heuristic(combinations)
-        return strategy
+            score = len(reduce(combinations, guess, feedback))
+            if score > max_score:
+                max_score = score
+        scores[guess] = max_score
+    return min(scores, key=scores.get)
 
 def play_game_ai():
     '''AI plays game'''
 
     combinations = all_combinations.copy()
 
-    # amount of guesses made
-    guesses_lst = []
-
     # amount of guesses for AI in 10 tries
 
     for amount in range(1, 10):
-        guess = worst_case_strategy(combinations)
-        guesses_lst.append(guess)
+        guess = simple_strategy(combinations)
         feedback = evaluate(guess, secret)
 
         black, white = evaluate(guess, secret)
@@ -135,6 +95,6 @@ def play_game_ai():
         black, white = evaluate(guess, secret)
         print(f'feedback: {black}, {white}')
 
-    return guesses_lst
+    return guess
 
 play_game_ai()
